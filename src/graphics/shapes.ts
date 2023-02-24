@@ -6,6 +6,7 @@ export interface Point {
 }
 
 const EDGE_THICKNESS = 4
+const VERTEX_RADIUS = 5
 
 export const getRadAngleBetweenPoints = (a: Point, b: Point): number => {
   return Math.atan2(b.y - a.y, b.x - a.x)
@@ -49,11 +50,11 @@ export const createDirectionalTriangle = (side: number, x: number, y: number, ro
 export const createVertex = (x: number, y: number): Graphics => {
   const vertex = new Graphics()
   vertex.beginFill(0xFEEB77, 1)
-  vertex.drawCircle(0, 0, 12)
+  vertex.drawCircle(0, 0, VERTEX_RADIUS * 2 + 2)
   vertex.endFill()
 
   vertex.beginFill(0x650A5A, 1)
-  vertex.drawCircle(0, 0, 10)
+  vertex.drawCircle(0, 0, VERTEX_RADIUS * 2)
   vertex.endFill()
 
   vertex.position.set(x, y)
@@ -70,11 +71,11 @@ export const createVertex = (x: number, y: number): Graphics => {
 }
 
 export const createEdge = (from: Point, to: Point): Graphics => {
-  const width = getDistanceBetweenPoints(from, to)
+  const width = getDistanceBetweenPoints(from, to) - VERTEX_RADIUS * 4
 
   const edge = new Graphics()
   edge.beginFill(0xFEEB77)
-  edge.drawRect(0, 0, width, EDGE_THICKNESS)
+  edge.drawRect(VERTEX_RADIUS * 2, 0, width, EDGE_THICKNESS)
   edge.endFill()
   edge.pivot.set(0, EDGE_THICKNESS / 2)
   edge.position.set(from.x, from.y)
