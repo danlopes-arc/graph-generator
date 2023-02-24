@@ -48,10 +48,14 @@ export const createDirectionalTriangle = (side: number, rotation: number): Graph
 
 export const createVertex = (x: number, y: number): Graphics => {
   const vertex = new Graphics()
-  vertex.lineStyle(2, 0xFEEB77, 1)
+  vertex.beginFill(0xFEEB77, 1)
+  vertex.drawCircle(0, 0, 12)
+  vertex.endFill()
+
   vertex.beginFill(0x650A5A, 1)
   vertex.drawCircle(0, 0, 10)
   vertex.endFill()
+
   vertex.position.set(x, y)
 
   vertex.interactive = true
