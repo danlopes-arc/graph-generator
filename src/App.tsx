@@ -1,6 +1,6 @@
+import { Application } from 'pixi.js';
 import { useEffect, useRef } from "react";
-import { Application } from 'pixi.js'
-import { createDirectionalTriangle, createEdge, createVertex, getRadAngleBetweenPoints } from "./graphics/shapes";
+import { createEdge, createVertex } from "./graphics/shapes";
 
 const createApp = (): Application => {
   const app = new Application({
@@ -15,12 +15,9 @@ const createApp = (): Application => {
 
   const line1 = createEdge(vertex1, vertex2)
 
-  const triangle = createDirectionalTriangle(10, 20, 20, getRadAngleBetweenPoints(vertex1, vertex2))
-
   app.stage.addChild(line1)
   app.stage.addChild(vertex1)
   app.stage.addChild(vertex2)
-  app.stage.addChild(triangle)
 
   return app
 }
