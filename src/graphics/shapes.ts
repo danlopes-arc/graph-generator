@@ -63,6 +63,9 @@ export const createVertex = (x: number, y: number): Graphics => {
     console.log('vertex clicked');
   })
 
+  vertex.on('pointerover', (e) =>  vertex.alpha = 0.5)
+  vertex.on('pointerout', (e) => vertex.alpha = 1)
+
   return vertex
 }
 
@@ -81,6 +84,9 @@ export const createEdge = (from: Point, to: Point): Graphics => {
   edge.on('click', (e) => {
     console.log('edge clicked');
   })
+  
+  edge.on('pointerover', (e) =>  edge.alpha = 0.5)
+  edge.on('pointerout', (e) => edge.alpha = 1)
 
   return edge
 }
