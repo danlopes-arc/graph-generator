@@ -17,7 +17,7 @@ export const getDistanceBetweenPoints = (a: Point, b: Point): number => {
   return Math.sqrt(width ** 2 + height ** 2)
 }
 
-export const createDirectionalTriangle = (side: number, rotation: number): Graphics => {
+export const createDirectionalTriangle = (side: number, x: number, y: number, rotation: number): Graphics => {
   const halfSide = side / 2
   const height = side
   const width = Math.sqrt(side ** 2 - halfSide ** 2)
@@ -37,8 +37,8 @@ export const createDirectionalTriangle = (side: number, rotation: number): Graph
   triangle.lineTo(0, height * 0.8)
   triangle.endFill()
   triangle.pivot.set(0, 5)
-  triangle.x = 20
-  triangle.y = 20
+  triangle.x = x
+  triangle.y = x
   triangle.rotation = rotation
   
   triangle.interactive = true

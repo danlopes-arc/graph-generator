@@ -15,7 +15,7 @@ const createApp = (): Application => {
 
   const line1 = createEdge(vertex1, vertex2)
 
-  const triangle = createDirectionalTriangle(10, getRadAngleBetweenPoints(vertex1, vertex2))
+  const triangle = createDirectionalTriangle(10, 20, 20, getRadAngleBetweenPoints(vertex1, vertex2))
 
   app.stage.addChild(line1)
   app.stage.addChild(vertex1)
