@@ -5,8 +5,16 @@ export interface Point {
   y: number
 }
 
+const EDGE_THICKNESS = 4
+
 export const getRadAngleBetweenPoints = (a: Point, b: Point): number => {
   return Math.atan2(b.y - a.y, b.x - a.x)
+}
+
+export const getDistanceBetweenPoints = (a: Point, b: Point): number => {
+  const width = b.x - a.x
+  const height = b.y - a.y
+  return Math.sqrt(width ** 2 + height ** 2)
 }
 
 export const createDirectionalTriangle = (side: number, rotation: number): Graphics => {
@@ -32,6 +40,8 @@ export const createDirectionalTriangle = (side: number, rotation: number): Graph
   triangle.x = 20
   triangle.y = 20
   triangle.rotation = rotation
+  
+  triangle.interactive = true
 
   return triangle
 }
@@ -44,14 +54,29 @@ export const createVertex = (x: number, y: number): Graphics => {
   vertex.endFill()
   vertex.position.set(x, y)
 
+  vertex.interactive = true
+  vertex.on('click', (e) => {
+    console.log('vertex clicked');
+  })
+
   return vertex
 }
 
 export const createEdge = (from: Point, to: Point): Graphics => {
-  const line = new Graphics()
-  line.lineStyle(4, 0xFEEB77, 1)
-  line.moveTo(from.x, from.y)
-  line.lineTo(to.x, to.y)
+  const width = getDistanceBetweenPoints(from, to)
 
-  return line
+  const edge = new Graphics()
+  edge.beginFill(0xFEEB77)
+  edge.drawRect(0, 0, width, EDGE_THICKNESS)
+  edge.endFill()
+  edge.pivot.set(0, EDGE_THICKNESS / 2)
+  edge.position.set(from.x, from.y)
+  edge.rotation = getRadAngleBetweenPoints(from, to)
+  
+  edge.interactive = true
+  edge.on('click', (e) => {
+    console.log('edge clicked');
+  })
+
+  return edge
 }
